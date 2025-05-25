@@ -1,0 +1,4 @@
+site_name: RU HPC resources
+nav:
+  - Home: index.md
+
