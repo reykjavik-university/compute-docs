@@ -1,4 +1,16 @@
-site_name: RU HPC resources
+site_name: SciComp @ RU
+
+plugins:
+  - search
+  - blogging:
+      dirs:
+        - posts
+
+markdown_extensions:
+  - meta
+
 nav:
   - Home: index.md
+  - News: news.md
 
+site_url: https://scicomp.ru.is
