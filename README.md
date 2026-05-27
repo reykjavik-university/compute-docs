@@ -13,7 +13,7 @@ This site is built with [MkDocs](https://www.mkdocs.org/). Content is written in
 To test locally, 
 
  - Clone the repo using `git clone https://github.com/reykjavik-university/compute-docs.git`
- - Create a Python virtual environment and install the following packages: `mkdocs`, `mkdocs-blogging-plugin`.
+ - Create a Python virtual environment and install the following packages: `mkdocs`, `mkdocs-blogging-plugin`, `mkdocs-rss-plugin`.
  - All content is in Markdown files within `docs/`.
  - Run `mkdocs build` to generate the static HTML pages, which you will find in `site/`.
  - Run `mkdocs serve` to run a local server and auto-refresh the generated site as you edit Markdown files.

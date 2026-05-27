@@ -1,10 +1,15 @@
 site_name: SciComp @ RU
+site_description: Scientific Computing and HPC at Reykjavík University
 
 plugins:
   - search
   - blogging:
       dirs:
         - posts
+  - rss:
+      match_path: posts/.*
+      date_from_meta:
+        as_creation: date
 
 markdown_extensions:
   - meta
