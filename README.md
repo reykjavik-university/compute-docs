@@ -4,16 +4,26 @@ These are the sources for the Scientific Computer at Reykjavík University websi
 
 ### Contributions
 
-Please open a pull request.
+This website is meant to collect useful information for all people at RU who do scientific computing or use HPC clusters. Contributions, such as tutorials, are welcome.
+
+If you intend to contribute, contact @szhorvat in email first. Contributions can be made through a pull request.
 
 ### Setup and local testing
 
 This site is built with [MkDocs](https://www.mkdocs.org/). Content is written in Markdown.
 
-To test locally, 
+Steps to contribute, and test the site locally:
 
- - Clone the repo using `git clone https://github.com/reykjavik-university/compute-docs.git`
- - Create a Python virtual environment and install the following packages: `mkdocs`, `mkdocs-blogging-plugin`, `mkdocs-rss-plugin`.
- - All content is in Markdown files within `docs/`.
+ - Fork this repository and check it out locally using `git clone`.
+ - Create a Python virtual environment and install the required packages. For most people, the following commands will work:
+     ```
+     python3 -m venv .venv
+     source .venv/bin/activate
+     pip install -r requirements.txt
+     ```
+   Note that you will need to activate the virtual environment using `source .venv/bin/activate` every time you open a new terminal window to work on this project.
  - Run `mkdocs build` to generate the static HTML pages, which you will find in `site/`.
- - Run `mkdocs serve` to run a local server and auto-refresh the generated site as you edit Markdown files.
+ - More conveniently, run `mkdocs serve` to run a local server and auto-refresh the generated site as you edit Markdown files.
+ - Make sure that you create a new branch for your pull request (i.e. do not base the pull request on your fork's `main` branch).
+
+If you need help with any of this, ask for advice in our Discord chat!
