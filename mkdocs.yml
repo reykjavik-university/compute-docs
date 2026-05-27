@@ -12,5 +12,6 @@ markdown_extensions:
 nav:
   - Home: index.md
   - News: news.md
+  - Contributing: contributions.md
 
 site_url: https://scicomp.ru.is
