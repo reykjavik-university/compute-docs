@@ -1,12 +1,12 @@
 # SciComp @ RU website
 
-These are the sources for the Scientific Computer at Reykjavík University website. Introductions for contributing are below:
+These are the sources for the Scientific Computer at Reykjavík University website at https://scicomp.ru.is/. Instructions for contributing are below:
 
 ### Contributions
 
-This website is meant to collect useful information for all people at RU who do scientific computing or use HPC clusters. Contributions, such as tutorials, are welcome.
+This website is meant to collect useful information for all people at RU who do scientific computing or use HPC clusters. Contributions, such as guides, tutorials, and links to useful resources, are very welcome.
 
-If you intend to contribute, contact @szhorvat in email first. Contributions can be made through a pull request.
+If you intend to contribute, ask in our Discord chat first. Contributions can be made through a pull request.
 
 ### Setup and local testing
 
