@@ -244,18 +244,6 @@ device = torch.device("cuda")
 model = model.to(device)
 ```
 
----
-
-## Course conventions
-
-- **Project working directory:** `~/elja_project/`
-- **Shared env:** `~/elja_env/` (instructions on the course page)
-- **Logs:** keep them in `logs/` subdirectory — `.gitignore` it
-- **Job time limit policy:** course jobs ≤ 4h CPU, ≤ 6h GPU (request extension if needed)
-- **Help:** post in the course channel (`#cluster`) before emailing — others have hit the same issue
-
----
-
 ## One-line emergency commands
 
 ```bash
