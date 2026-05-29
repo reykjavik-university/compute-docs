@@ -130,10 +130,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#course-conventions" class="nav-link">Course conventions</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-bs-level="2"><a href="#one-line-emergency-commands" class="nav-link">One-line emergency commands</a>
               <ul class="nav flex-column">
               </ul>
@@ -343,16 +339,6 @@ assert torch.cuda.is_available(), &quot;CUDA not available — check --gres in S
 device = torch.device(&quot;cuda&quot;)
 model = model.to(device)
 </code></pre>
-<hr />
-<h2 id="course-conventions">Course conventions</h2>
-<ul>
-<li><strong>Project working directory:</strong> <code>~/elja_project/</code></li>
-<li><strong>Shared env:</strong> <code>~/elja_env/</code> (instructions on the course page)</li>
-<li><strong>Logs:</strong> keep them in <code>logs/</code> subdirectory — <code>.gitignore</code> it</li>
-<li><strong>Job time limit policy:</strong> course jobs ≤ 4h CPU, ≤ 6h GPU (request extension if needed)</li>
-<li><strong>Help:</strong> post in the course channel (<code>#cluster</code>) before emailing — others have hit the same issue</li>
-</ul>
-<hr />
 <h2 id="one-line-emergency-commands">One-line emergency commands</h2>
 <pre><code class="language-bash">scancel -u $USER              # cancel all your jobs (use with care)
 squeue -u $USER -h | wc -l    # how many jobs do I have running/queued
