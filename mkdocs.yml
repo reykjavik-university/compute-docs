@@ -16,7 +16,9 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Documentation: docs.md
+  - Documentation:
+      - Overview: docs.md
+      - SLURM cluster tutorial: slurm.md
   - News: news.md
   - Contributing: contributions.md
 
