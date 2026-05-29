@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://scicomp.ru.is/slurm/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>SLURM cluster tutorial - SciComp @ RU</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">SciComp @ RU</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Documentation</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../docs/" class="dropdown-item">Overview</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">SLURM cluster tutorial</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../news/" class="nav-link">News</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../contributions/" class="nav-link">Contributing</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../docs/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../news/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#slurm-cluster-tutorial" class="nav-link">SLURM Cluster Tutorial</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#first-time-setup" class="nav-link">First-time setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-five-slurm-commands-you-actually-need" class="nav-link">The five SLURM commands you actually need</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#create-your-python-environment" class="nav-link">Create your Python environment</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#downloadable-job-templates" class="nav-link">Downloadable job templates</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#minimal-cpu-job-script" class="nav-link">Minimal CPU job script</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#minimal-gpu-job-script" class="nav-link">Minimal GPU job script</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#file-transfer" class="nav-link">File transfer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#the-good-citizen-rules" class="nav-link">The good-citizen rules</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#top-three-troubleshooting-cases" class="nav-link">Top three troubleshooting cases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#course-conventions" class="nav-link">Course conventions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#one-line-emergency-commands" class="nav-link">One-line emergency commands</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="slurm-cluster-tutorial">SLURM Cluster Tutorial</h1>
+<p>This tutorial is for students and researchers who need to run Python jobs on a
+SLURM-managed cluster. The examples use the Elja hostname and environment paths,
+but the workflow is general SLURM: adapt the hostname, partition names, modules,
+and environment path to match the cluster you are using.</p>
+<hr />
+<h2 id="first-time-setup">First-time setup</h2>
+<h3 id="1-generate-an-ssh-key-one-time-on-your-laptop">1. Generate an SSH key (one-time, on your laptop)</h3>
+<pre><code class="language-bash">ssh-keygen -t ed25519 -C &quot;your.email@university.edu&quot;
+# Press Enter to accept default location (~/.ssh/id_ed25519)
+# Choose a passphrase or leave empty
+</code></pre>
+<h3 id="2-send-your-public-key-to-the-cluster-admin">2. Send your <strong>public</strong> key to the cluster admin</h3>
+<pre><code class="language-bash">cat ~/.ssh/id_ed25519.pub
+# Copy the output and email it to: [admin contact]
+# NEVER send the private key (id_ed25519 without .pub)
+</code></pre>
+<h3 id="3-add-a-convenience-entry-to-sshconfig">3. Add a convenience entry to <code>~/.ssh/config</code></h3>
+<pre><code>Host elja
+    HostName cluster.address.example.edu
+    User your_username
+    IdentityFile ~/.ssh/id_ed25519
+</code></pre>
+<p>Now <code>ssh elja</code> is enough to log in.</p>
+<h3 id="4-verify">4. Verify</h3>
+<pre><code class="language-bash">ssh elja
+hostname    # should print the login node name
+exit
+</code></pre>
+<hr />
+<h2 id="the-five-slurm-commands-you-actually-need">The five SLURM commands you actually need</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sbatch job.slurm</code></td>
+<td>Submit a batch job. Returns a job ID.</td>
+</tr>
+<tr>
+<td><code>squeue -u $USER</code></td>
+<td>Show your queued and running jobs.</td>
+</tr>
+<tr>
+<td><code>scancel &lt;job_id&gt;</code></td>
+<td>Cancel a job (queued or running).</td>
+</tr>
+<tr>
+<td><code>sacct -j &lt;job_id&gt;</code></td>
+<td>Job history, including completed jobs.</td>
+</tr>
+<tr>
+<td><code>srun --pty bash</code></td>
+<td>Open an interactive shell on a compute node.</td>
+</tr>
+</tbody>
+</table>
+<p>For interactive GPU debugging:</p>
+<pre><code class="language-bash">srun --gres=gpu:1 --cpus-per-task=4 --mem=16G --time=1:00:00 --pty bash
+</code></pre>
+<hr />
+<h2 id="create-your-python-environment">Create your Python environment</h2>
+<p>Create the environment once, then activate the same environment in every
+interactive session and SLURM job that needs it.</p>
+<pre><code class="language-bash"># Log in to the cluster first
+ssh elja
+
+# If the cluster uses environment modules, load Python before creating the env.
+# Use `module avail python` if you need to see available versions.
+module load python/3.11
+
+# Create a virtual environment in your home directory
+python -m venv ~/elja_env
+
+# Activate it
+source ~/elja_env/bin/activate
+
+# Make sure pip itself is current inside the env
+python -m pip install --upgrade pip setuptools wheel
+</code></pre>
+<p>Install packages while the environment is active:</p>
+<pre><code class="language-bash"># From a project directory with requirements.txt
+python -m pip install -r requirements.txt
+
+# Or install packages directly
+python -m pip install numpy pandas scikit-learn matplotlib
+</code></pre>
+<p>Check that the environment is the one being used:</p>
+<pre><code class="language-bash">which python
+python -m pip list
+python -c &quot;import sys; print(sys.executable)&quot;
+</code></pre>
+<p>When you submit jobs, activate the environment in the job script before running
+Python:</p>
+<pre><code class="language-bash">module load python/3.11
+source ~/elja_env/bin/activate
+python my_script.py
+</code></pre>
+<p>Do not install packages inside every SLURM job. Install or update the environment
+once, then let jobs only activate and use it.</p>
+<hr />
+<h2 id="downloadable-job-templates">Downloadable job templates</h2>
+<p>Use these as starting points for your own jobs:</p>
+<ul>
+<li><a href="/downloads/submit_cpu.slurm" download>CPU job template</a></li>
+<li><a href="/downloads/submit_gpu.slurm" download>GPU job template</a></li>
+<li><a href="/downloads/submit_array.slurm" download>Array job template</a></li>
+</ul>
+<p>The templates are copied as downloadable files and are not rendered as pages.</p>
+<hr />
+<h2 id="minimal-cpu-job-script">Minimal CPU job script</h2>
+<pre><code class="language-bash">#!/bin/bash
+#SBATCH --job-name=my_job
+#SBATCH --output=logs/%x_%j.out      # %x = job name, %j = job ID
+#SBATCH --error=logs/%x_%j.err
+#SBATCH --time=01:00:00              # HH:MM:SS — be realistic
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=8G
+
+# Environment setup
+source ~/elja_env/bin/activate       # or: module load python/3.11
+
+# Run
+python my_script.py
+</code></pre>
+<p>Submit with: <code>sbatch job.slurm</code></p>
+<hr />
+<h2 id="minimal-gpu-job-script">Minimal GPU job script</h2>
+<pre><code class="language-bash">#!/bin/bash
+#SBATCH --job-name=cnn_train
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+#SBATCH --time=02:00:00
+#SBATCH --gres=gpu:1                 # request 1 GPU
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+
+source ~/elja_env/bin/activate
+
+# Verify GPU is visible — fail loudly if not
+nvidia-smi
+python -c &quot;import torch; assert torch.cuda.is_available(), 'No GPU!'&quot;
+
+python train_cnn.py
+</code></pre>
+<hr />
+<h2 id="file-transfer">File transfer</h2>
+<pre><code class="language-bash"># Laptop → cluster
+scp my_data.csv elja:~/project/
+
+# Cluster → laptop
+scp elja:~/project/results.json .
+
+# Whole directory
+scp -r elja:~/project/results/ ./local_results/
+</code></pre>
+<p>For larger or syncing workflows, use <code>rsync</code>:</p>
+<pre><code class="language-bash">rsync -avz ~/project/ elja:~/project/
+</code></pre>
+<hr />
+<h2 id="the-good-citizen-rules">The good-citizen rules</h2>
+<ol>
+<li><strong>Request what you need, not the max.</strong> Asking for 64 CPUs and 256 GB when you need 4 and 8 makes you wait longer <em>and</em> blocks others.</li>
+<li><strong>Set realistic time limits.</strong> If your job runs 30 minutes, ask for 1 hour, not 24. SLURM schedules short jobs faster.</li>
+<li><strong>Cancel failed jobs.</strong> Don't leave broken jobs sitting in the queue.</li>
+<li><strong>Don't hoard GPUs.</strong> Especially for interactive sessions — close them when you're not actively using them.</li>
+<li><strong>Don't poll <code>squeue</code> in a loop.</strong> A watch every few seconds is enough; tighter loops hammer the scheduler.</li>
+<li><strong>Test small before submitting big.</strong> Run on a subset locally or in an interactive session before launching a 12-hour sweep.</li>
+</ol>
+<hr />
+<h2 id="top-three-troubleshooting-cases">Top three troubleshooting cases</h2>
+<h3 id="job-stuck-in-pd-pending-state-forever">Job stuck in <code>PD</code> (pending) state forever</h3>
+<pre><code class="language-bash">squeue -j &lt;job_id&gt; -o &quot;%i %T %r&quot;   # shows reason
+</code></pre>
+<p>Usually one of:
+- Requesting more resources than any node has (<code>PartitionConfig</code>)
+- Asking for a GPU when none are free (<code>Resources</code>)
+- Hit your user/group fair-share limit (<code>AssocGrp...</code>)</p>
+<p><strong>Fix:</strong> lower resource request or wait. Don't resubmit repeatedly — that won't help.</p>
+<h3 id="job-fails-immediately-empty-or-weird-output">Job fails immediately, empty or weird output</h3>
+<p>Check the <code>.err</code> file first:</p>
+<pre><code class="language-bash">cat logs/my_job_12345.err
+</code></pre>
+<p>Most common causes:
+- Virtual environment not activated → <code>ModuleNotFoundError</code>
+- Wrong working directory → <code>FileNotFoundError</code>
+- <code>#SBATCH</code> directives parsed as bash comments because of a typo (e.g., <code># SBATCH</code> with a space)</p>
+<h3 id="training-runs-but-is-incredibly-slow-on-a-gpu-job">Training runs but is incredibly slow on a "GPU" job</h3>
+<p>You forgot to verify the GPU. PyTorch falls back to CPU silently. Always include:</p>
+<pre><code class="language-python">import torch
+assert torch.cuda.is_available(), &quot;CUDA not available — check --gres in SLURM script&quot;
+device = torch.device(&quot;cuda&quot;)
+model = model.to(device)
+</code></pre>
+<hr />
+<h2 id="course-conventions">Course conventions</h2>
+<ul>
+<li><strong>Project working directory:</strong> <code>~/elja_project/</code></li>
+<li><strong>Shared env:</strong> <code>~/elja_env/</code> (instructions on the course page)</li>
+<li><strong>Logs:</strong> keep them in <code>logs/</code> subdirectory — <code>.gitignore</code> it</li>
+<li><strong>Job time limit policy:</strong> course jobs ≤ 4h CPU, ≤ 6h GPU (request extension if needed)</li>
+<li><strong>Help:</strong> post in the course channel (<code>#cluster</code>) before emailing — others have hit the same issue</li>
+</ul>
+<hr />
+<h2 id="one-line-emergency-commands">One-line emergency commands</h2>
+<pre><code class="language-bash">scancel -u $USER              # cancel all your jobs (use with care)
+squeue -u $USER -h | wc -l    # how many jobs do I have running/queued
+sinfo -o &quot;%P %a %l %D %t&quot;     # what nodes/partitions exist and their state
+sacct -j &lt;jobid&gt; -o JobID,State,Elapsed,MaxRSS,ReqMem   # post-mortem on a job
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
