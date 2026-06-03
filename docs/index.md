@@ -24,4 +24,4 @@ Reykjavik University has access to large-scale computing resources at the [LUMI 
 
 ### <span style="color: red">Join our chatroom!</span>
 
-A Discord server was created as a support channel for everyone who deals with HPC or scientific computing at RU, including both students and faculty. The following invite link works without restructions and will be valid until 2026-06-03: [https://discord.gg/qYtuZRdP](https://discord.gg/qYtuZRdP). *Please join now!* After this time, a new method for joining the server will be provided.
+A Discord server was created as a support channel for everyone who deals with HPC or scientific computing at RU, including both students and faculty. The following invite link works without restructions and will be valid until 2026-06-09: [https://discord.gg/TYNnBwgY](https://discord.gg/TYNnBwgY). *Please join now!* After this time, a new method for joining the server will be provided.
