@@ -6,9 +6,11 @@ This website hosts documentation on HPC access and scientific computing resource
 
 A non-exhaustive list of resources available to RU is below.
 
-#### Local HPC cluster
+#### Computers at RU
 
- - [Documentation and access instructions.](https://computewiki.ru.is/)
+ - Slurm-based HPC cluster: [Documentation and access instructions](https://computewiki.ru.is/)
+ - Obtain a virtual machine (Linux or Windows): Send an email to `help at ru.is` to open a ticket, and explain your use case.
+
 
 #### IREI resources
 
